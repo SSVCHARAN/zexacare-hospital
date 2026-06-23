@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Reveal from "@/components/animations/Reveal";
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 import StaggerContainer, {
   StaggerItem,
 } from "@/components/animations/StaggerContainer";
@@ -84,7 +85,7 @@ const process = [
 export default function ServicesContent() {
   return (
     <>
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section id="services" className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 hero-gradient opacity-90" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(255,255,255,0.1),transparent_50%)]" />
         <div className="relative mx-auto max-w-4xl px-6 text-center">
@@ -101,6 +102,10 @@ export default function ServicesContent() {
               full spectrum of medical services delivered by expert specialists.
             </p>
           </Reveal>
+
+          <Reveal delay={0.2} className="mt-12">
+            <ImagePlaceholder aspectRatio="21/9" label="Medical Facility Image" className="w-full" />
+          </Reveal>
         </div>
       </section>
 
@@ -113,6 +118,7 @@ export default function ServicesContent() {
             {departments.map((dept) => (
               <StaggerItem key={dept.title}>
                 <GlassCard className="group h-full flex flex-col" glow>
+                  <ImagePlaceholder aspectRatio="16/9" label={dept.title + " Image"} className="w-full mb-4" />
                   <span className="mb-4 text-4xl">{dept.icon}</span>
                   <h3 className="font-heading text-xl font-semibold text-text">
                     {dept.title}
@@ -211,7 +217,7 @@ export default function ServicesContent() {
             </p>
             <div className="mt-6">
               <Button
-                href="/contact"
+                href="/#contact"
                 variant="secondary"
                 size="lg"
               >

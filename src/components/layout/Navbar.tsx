@@ -3,19 +3,18 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/contact", label: "Contact" },
+  { href: "/#home", section: "home", label: "Home" },
+  { href: "/#about", section: "about", label: "About" },
+  { href: "/#services", section: "services", label: "Services" },
+  { href: "/#contact", section: "contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const pathname = usePathname();
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -24,8 +23,43 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    const sectionIds = links.map((l) => l.section);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: "-80px 0px 0px 0px" }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     setMobileOpen(false);
-  }, [pathname]);
+  }, [activeSection]);
+
+  const handleClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    const hash = href.split("#")[1];
+    if (hash) {
+      e.preventDefault();
+      const el = document.getElementById(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <motion.header
@@ -33,9 +67,7 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "glass shadow-md"
-          : "bg-transparent"
+        scrolled ? "glass shadow-md" : "bg-transparent"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
@@ -54,9 +86,10 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-8 md:flex">
           {links.map((link) => (
-            <Link
-              key={link.href}
+            <a
+              key={link.section}
               href={link.href}
+              onClick={(e) => handleClick(e, link.href)}
               className={`relative text-sm font-medium transition-colors ${
                 scrolled
                   ? "text-text hover:text-primary"
@@ -64,20 +97,21 @@ export default function Navbar() {
               }`}
             >
               {link.label}
-              {pathname === link.href && (
+              {activeSection === link.section && (
                 <motion.span
                   layoutId="nav-underline"
                   className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-primary"
                 />
               )}
-            </Link>
+            </a>
           ))}
-          <Link
-            href="/contact"
+          <a
+            href="/#contact"
+            onClick={(e) => handleClick(e, "/#contact")}
             className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-primary-light hover:shadow-lg"
           >
             Book Appointment
-          </Link>
+          </a>
         </div>
 
         <button
@@ -117,21 +151,25 @@ export default function Navbar() {
           >
             {links.map((link, i) => (
               <motion.div
-                key={link.href}
+                key={link.section}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
               >
-                <Link
+                <a
                   href={link.href}
+                  onClick={(e) => {
+                    handleClick(e, link.href);
+                    setMobileOpen(false);
+                  }}
                   className={`text-2xl font-semibold ${
-                    pathname === link.href
+                    activeSection === link.section
                       ? "text-primary"
                       : "text-text"
                   }`}
                 >
                   {link.label}
-                </Link>
+                </a>
               </motion.div>
             ))}
             <motion.div
@@ -139,12 +177,16 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              <Link
-                href="/contact"
+              <a
+                href="/#contact"
+                onClick={(e) => {
+                  handleClick(e, "/#contact");
+                  setMobileOpen(false);
+                }}
                 className="rounded-full bg-primary px-8 py-3 text-lg font-semibold text-white"
               >
                 Book Appointment
-              </Link>
+              </a>
             </motion.div>
           </motion.div>
         )}

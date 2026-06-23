@@ -118,7 +118,7 @@ export default function ServicesPreview() {
         </StaggerContainer>
 
         <Reveal className="mt-12 text-center" delay={0.3}>
-          <Button href="/services" variant="primary" size="lg">
+          <Button href="/#services" variant="primary" size="lg">
             View All Services
             <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path

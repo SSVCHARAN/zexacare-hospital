@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Reveal from "@/components/animations/Reveal";
 import Button from "@/components/ui/Button";
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 
 const contactInfo = [
   {
@@ -70,7 +71,7 @@ export default function ContactContent() {
 
   return (
     <>
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section id="contact" className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-[#0D1B2A]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(13,124,102,0.2),transparent_60%)]" />
         <div className="relative mx-auto max-w-4xl px-6 text-center">
@@ -241,18 +242,9 @@ export default function ContactContent() {
                   ))}
                 </div>
 
-                <div className="glass mt-8 overflow-hidden rounded-2xl">
-                  <div className="aspect-video w-full bg-[#0D1B2A] flex items-center justify-center">
-                    <div className="text-center text-gray-400">
-                      <svg className="mx-auto h-10 w-10 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                        <path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                      </svg>
-                      <p className="text-sm">123 Healthcare Avenue</p>
-                      <p className="text-sm">Medical District, City</p>
-                    </div>
+                  <div className="glass mt-8 overflow-hidden rounded-2xl">
+                    <ImagePlaceholder aspectRatio="16/9" label="Map Location" className="w-full" />
                   </div>
-                </div>
               </div>
             </Reveal>
           </div>

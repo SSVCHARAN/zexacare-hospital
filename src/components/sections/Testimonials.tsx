@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Reveal from "@/components/animations/Reveal";
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 
 const testimonials = [
   {
@@ -57,6 +58,9 @@ export default function Testimonials() {
               transition={{ duration: 0.4, ease: "easeInOut" }}
               className="glass mx-auto max-w-2xl rounded-3xl p-8 sm:p-12"
             >
+              <div className="mb-4 flex justify-center">
+                <ImagePlaceholder rounded label="Photo" className="h-16 w-16" />
+              </div>
               <div className="mb-4 flex justify-center gap-1">
                 {Array.from({ length: testimonials[current].rating }).map(
                   (_, i) => (

@@ -5,7 +5,7 @@ import Button from "@/components/ui/Button";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
+    <section id="home" className="relative flex min-h-screen items-center justify-center overflow-hidden">
       <div className="hero-gradient absolute inset-0 opacity-90" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(255,255,255,0.1),transparent_50%)]" />
 
@@ -56,7 +56,7 @@ export default function Hero() {
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
           <Button
-            href="/contact"
+            href="/#contact"
             variant="secondary"
             size="lg"
             className="min-w-[200px]"
@@ -64,7 +64,7 @@ export default function Hero() {
             Book Appointment
           </Button>
           <Button
-            href="/services"
+            href="/#services"
             variant="outline"
             size="lg"
             className="min-w-[200px] border-white/40 text-white hover:bg-white/10"
@@ -77,7 +77,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          className="absolute bottom-20 left-1/2 -translate-x-1/2"
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}

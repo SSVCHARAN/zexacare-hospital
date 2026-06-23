@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Reveal from "@/components/animations/Reveal";
+import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 
 const values = [
   {
@@ -46,7 +47,7 @@ const team = [
 export default function AboutContent() {
   return (
     <>
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section id="about" className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-[#0D1B2A]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(13,124,102,0.2),transparent_60%)]" />
         <div className="relative mx-auto max-w-4xl px-6 text-center">
@@ -65,6 +66,10 @@ export default function AboutContent() {
               bring together the brightest medical minds and the latest
               technology to serve our community.
             </p>
+          </Reveal>
+
+          <Reveal delay={0.2} className="mt-12">
+            <ImagePlaceholder aspectRatio="21/9" label="Hospital Image" className="w-full" />
           </Reveal>
         </div>
       </section>
@@ -148,8 +153,9 @@ export default function AboutContent() {
             {team.map((member, i) => (
               <Reveal key={member.name} delay={i * 0.1}>
                 <div className="group text-center">
-                  <div className="gradient-bg mx-auto flex h-28 w-28 items-center justify-center rounded-full shadow-lg transition-transform duration-300 group-hover:scale-105">
-                    <span className="text-3xl font-bold text-white">
+                  <div className="relative mx-auto h-28 w-28 overflow-hidden rounded-full shadow-lg transition-transform duration-300 group-hover:scale-105">
+                    <ImagePlaceholder rounded label="Photo" className="h-full w-full" />
+                    <span className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-white drop-shadow-md">
                       {member.initials}
                     </span>
                   </div>

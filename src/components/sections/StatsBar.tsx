@@ -69,7 +69,7 @@ export default function StatsBar() {
   ];
 
   return (
-    <section className="relative -mt-20 z-20 mx-auto max-w-6xl px-6">
+    <section className="relative -mt-28 z-20 mx-auto max-w-6xl px-6">
       <div className="glass rounded-3xl px-8 py-12 shadow-xl sm:px-12 sm:py-16">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           {stats.map((stat, i) => (

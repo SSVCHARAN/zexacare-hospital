@@ -24,7 +24,7 @@ export default function CTABanner() {
         <Reveal delay={0.2}>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button
-              href="/contact"
+              href="/#contact"
               variant="secondary"
               size="lg"
               className="min-w-[200px]"

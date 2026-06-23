@@ -4,20 +4,31 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const quickLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
-  { href: "/services", label: "Our Services" },
-  { href: "/contact", label: "Contact" },
+  { href: "/#home", label: "Home" },
+  { href: "/#about", label: "About Us" },
+  { href: "/#services", label: "Our Services" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 const services = [
-  { href: "/services", label: "Cardiology" },
-  { href: "/services", label: "Neurology" },
-  { href: "/services", label: "Orthopedics" },
-  { href: "/services", label: "Pediatrics" },
+  { href: "/#services", label: "Cardiology" },
+  { href: "/#services", label: "Neurology" },
+  { href: "/#services", label: "Orthopedics" },
+  { href: "/#services", label: "Pediatrics" },
 ];
 
 export default function Footer() {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const hash = href.split("#")[1];
+    if (hash) {
+      e.preventDefault();
+      const el = document.getElementById(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
   return (
     <footer className="relative overflow-hidden bg-[#0D1B2A] text-white">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(13,124,102,0.15),transparent_50%)]" />
@@ -56,12 +67,13 @@ export default function Footer() {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <Link
+                  <a
                     href={link.href}
-                    className="text-sm text-gray-400 transition-colors hover:text-primary-light"
+                    onClick={(e) => handleClick(e, link.href)}
+                    className="text-sm text-gray-400 transition-colors hover:text-primary-light cursor-pointer"
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -79,12 +91,13 @@ export default function Footer() {
             <ul className="space-y-3">
               {services.map((service) => (
                 <li key={service.label}>
-                  <Link
+                  <a
                     href={service.href}
-                    className="text-sm text-gray-400 transition-colors hover:text-primary-light"
+                    onClick={(e) => handleClick(e, service.href)}
+                    className="text-sm text-gray-400 transition-colors hover:text-primary-light cursor-pointer"
                   >
                     {service.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>

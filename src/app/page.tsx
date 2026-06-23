@@ -1,7 +1,9 @@
 import Hero from "@/components/sections/Hero";
 import StatsBar from "@/components/sections/StatsBar";
-import ServicesPreview from "@/components/sections/ServicesPreview";
+import AboutContent from "@/components/sections/AboutContent";
+import ServicesContent from "@/components/sections/ServicesContent";
 import Testimonials from "@/components/sections/Testimonials";
+import ContactContent from "@/components/sections/ContactContent";
 import CTABanner from "@/components/sections/CTABanner";
 
 export default function Home() {
@@ -9,8 +11,10 @@ export default function Home() {
     <>
       <Hero />
       <StatsBar />
-      <ServicesPreview />
+      <AboutContent />
+      <ServicesContent />
       <Testimonials />
+      <ContactContent />
       <CTABanner />
     </>
   );
